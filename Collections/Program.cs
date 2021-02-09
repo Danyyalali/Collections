@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 namespace Collections
 {
     class Program
@@ -28,19 +29,19 @@ namespace Collections
             Array1.Add("bcd");
 
             var dcd = Array1[6];//Just for the sake of explicit typecasting
-            
+
             Array1.Insert(0, a * 2);//inserting value a*2 at 0 index 
             //by inserting every value will be pushed forward to the next location.
 
             Array1.AddRange(Array2);//adding another array list at the end of the first array list 
 
-            for( int i = 0; i < Array1.Count; i++)
+            for (int i = 0; i < Array1.Count; i++)
             {
                 Console.WriteLine("Value from {0} index ", i);
                 Console.WriteLine(Array1[i]);
             }
             Console.WriteLine("\n Ended The array List Now moving towards next Collection \n\n\n");
-            
+
 
 
 
@@ -48,7 +49,7 @@ namespace Collections
             Console.WriteLine("From Sorted List Nongeneric");
             int j = 0;
             SortedList myNames = new SortedList();
-            myNames.Add(j,a);
+            myNames.Add(j, a);
             j++;
             myNames.Add(j, b);
             j++;
@@ -71,9 +72,9 @@ namespace Collections
             Console.WriteLine("After removing an element");
             foreach (DictionaryEntry variable in myNames)
             {
-                Console.WriteLine("{0} {1}",variable.Key , variable.Value) ;
+                Console.WriteLine("{0} {1}", variable.Key, variable.Value);
             }
-            
+
 
 
 
@@ -98,7 +99,7 @@ namespace Collections
             myNames1.Remove(1);
             foreach (var variable in myNames1)
             {
-                Console.WriteLine("The value against key {0} is {1}",variable.Key, variable.Value);
+                Console.WriteLine("The value against key {0} is {1}", variable.Key, variable.Value);
             }
 
             Console.WriteLine("\n\n\n Using KeyValuePair Property");
@@ -124,11 +125,11 @@ namespace Collections
             dict.Add('d', "Dog");
             dict.Add('e', "Elephant");
             dict.Add('f', "Frog");
-            foreach(Object obj in dict)
+            foreach (Object obj in dict)
             {
                 Console.WriteLine(obj);
             }
-            
+
             dict.Add('g', "Goose");
             dict.Remove('a');
 
@@ -141,22 +142,22 @@ namespace Collections
                 Console.WriteLine(obj);
             }
             Console.WriteLine("\n\n\n From Dictionary Generic using KeyValuePair");
-            foreach (KeyValuePair<char,string> obj in dict)
+            foreach (KeyValuePair<char, string> obj in dict)
             {
-                Console.WriteLine("{0} {1}",obj.Key , obj.Value);
+                Console.WriteLine("{0} {1}", obj.Key, obj.Value);
             }
 
 
 
-            //Code for Hashset implementation starts here
+            //Code for HashTable implementation starts here
             Console.WriteLine("\n\n\n From Hashtable");
 
             Hashtable hash = new Hashtable();
-            hash.Add(1,a);
+            hash.Add(1, a);
             hash.Add('a', b);
             hash.Add('b', b);
             hash.Add('d', b);
-            foreach(DictionaryEntry obj in hash)
+            foreach (DictionaryEntry obj in hash)
             {
                 Console.WriteLine("{0} {1}", obj.Key, obj.Value);
 
@@ -172,12 +173,12 @@ namespace Collections
             myList.Add(2);
             myList.Add(0);
             myList.Sort();
-            for(int i = 0; i < myList.Count; i++)
+            for (int i = 0; i < myList.Count; i++)
             {
                 Console.WriteLine(myList[i]);
             }
             myList.RemoveAt(0);
-            myList.Insert(0,20);
+            myList.Insert(0, 20);
             myList.Sort();
             for (int i = 0; i < myList.Count; i++)
             {
@@ -188,15 +189,78 @@ namespace Collections
             List<ArrayList> myCollector = new List<ArrayList>();
             myCollector.Add(Array1);
             myCollector.Add(Array2);
-            Console.WriteLine("\n\n"+myCollector[0].ToArray().Length);
+            Console.WriteLine("\n\n" + myCollector[0].ToArray().Length);
 
 
+            //Adding dummy student data into the list of students
 
 
+            int age;
+            float cgpa;
+            string name;
+            string email;
+            string address;
+            string contactNumber;
+            List<StudentInfo> myClass = new List<StudentInfo>();
+            StudentInfo bacs = new StudentInfo();
+            myClass.Add(bacs);
+            myClass.Add(bacs);
+            for (int i = 0; i < 0; i++)
+            {
+                Console.WriteLine("Write the age of {0} student", i + 1);
+                age = int.Parse(Console.ReadLine());
+                Console.WriteLine("Write the cgpa of {0} student", i + 1);
+                cgpa = float.Parse(Console.ReadLine());
+                Console.WriteLine("Write the name of {0} student", i + 1);
+                name = Console.ReadLine();
+                Console.WriteLine("Write the email of {0} student", i + 1);
+                email = Console.ReadLine();
+                Console.WriteLine("Write the address of {0} student", i + 1);
+                address = Console.ReadLine();
+                Console.WriteLine("Write the contactNumber of {0} student", i + 1);
+                contactNumber = Console.ReadLine();
+
+                myClass.Add(new StudentInfo(age, cgpa, name, email, address, contactNumber));
+            }
+            foreach (StudentInfo s in myClass)
+                if (s.AGE >= 18)
+                {
+                    Console.WriteLine("The student details are as follow");
+                    Console.WriteLine("The Name of the student is {0}", s.NAME);
+                    Console.WriteLine("The Age of the student is {0}", s.AGE);
+                    Console.WriteLine("The Cgpa of the student is {0}", s.CGPA);
+                    Console.WriteLine("The Email of the student is {0}", s.EMAIL);
+                    Console.WriteLine("The Address of the student is {0}", s.ADDRESS);
+                    Console.WriteLine("The Contact Number of the student is {0}", s.CONTACTNUMBER);
+
+                }
+            var results = from StudentInfo in myClass
+                          where StudentInfo.AGE >= 12
+                          select StudentInfo;
+            Console.WriteLine("Student with age greater then 12 are as follow");
+            
+            foreach( StudentInfo s in results)
+            {
+                Console.WriteLine(s.AGE);
+            }
+            /*
+            myClass.Select(x=>new object { name=x.Total})
+
+            var results = from s in myClass
+                          select s;
+
+               foreach(StudentInfo info in myClass)
+                {
+            Console.WriteLine(results[0]);*/
 
 
             //Code for Stack implementation starts here
-
+            Console.WriteLine("\n\n\n Implementation of Stack starts from here \n");
+            Stack<int> myStack = new Stack<int>(f);
+            foreach(int variable in myStack)
+            {
+                Console.Write(variable + ",");
+            }
 
         }
     }
