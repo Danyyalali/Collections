@@ -1,0 +1,2 @@
+Hello from the file1
+Hello once again using Stream Writer

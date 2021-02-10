@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Text;
+
 namespace Collections
 {
     class Program
@@ -43,6 +46,9 @@ namespace Collections
             Console.WriteLine("\n Ended The array List Now moving towards next Collection \n\n\n");
 
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
             //Code for Sorted List (Non generic)
@@ -78,6 +84,9 @@ namespace Collections
 
 
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //Code for Sorted List (Generic)
             Console.WriteLine("\n\n\n From Sorted List Generic");
@@ -114,6 +123,13 @@ namespace Collections
                 Console.WriteLine("true {0}", result);
             }
             //Console.WriteLine(myNames1[0]);
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //Code for Dictionary implementation starts here
             Console.WriteLine("\n\n\n From Dictionary");
@@ -162,6 +178,9 @@ namespace Collections
                 Console.WriteLine("{0} {1}", obj.Key, obj.Value);
 
             }
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
             //Code for List implementation starts here
@@ -254,13 +273,192 @@ namespace Collections
             Console.WriteLine(results[0]);*/
 
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+
+
             //Code for Stack implementation starts here
             Console.WriteLine("\n\n\n Implementation of Stack starts from here \n");
             Stack<int> myStack = new Stack<int>(f);
-            foreach(int variable in myStack)
+            
+            
+            Console.WriteLine("\nStack after entering values using array \n");
+            foreach (int variable in myStack)
             {
                 Console.Write(variable + ",");
             }
+            Console.WriteLine();
+            
+            
+            Console.WriteLine("\nStack after entering Value using push \n");
+            myStack.Push(20);
+            foreach (int variable in myStack)
+            {
+                Console.Write(variable + ",");
+            }
+
+
+            Console.WriteLine("\nStack after Peeking from it \n");
+            Console.WriteLine(myStack.Peek());
+            foreach (int variable in myStack)
+            {
+                Console.Write(variable + ",");
+            }
+            
+            
+            Console.WriteLine("\nStack after popping element from it \n");
+            Console.WriteLine(myStack.Pop());
+            foreach (int variable in myStack)
+            {
+                Console.Write(variable + ",");
+            }
+            Console.WriteLine();
+            int check=24;
+            if (myStack.Contains(check))
+            {
+                Console.WriteLine("true the stack contains the value {0}", check);
+            }
+            else
+            {
+                Console.WriteLine("False the stack doesnot contains the value {0}", check);
+
+            }
+
+
+            //Iplementation of queue starts from here
+            Queue<int> myQueue = new Queue<int>(f);
+            Console.WriteLine("\nQueue after entering values from array");
+            foreach (int variable in myQueue)
+            {
+                Console.Write(variable + ",");
+            }
+
+            myQueue.Enqueue(20);
+            Console.WriteLine("\n\nQueue after using enqueue");
+            foreach (int variable in myQueue)
+            {
+                Console.Write(variable + ",");
+            }
+
+
+
+            Console.WriteLine("\n\nQueue after Dequeue method");
+            Console.WriteLine("The value returned from the dequeue method is "+ myQueue.Dequeue());
+            foreach (int variable in myQueue)
+            {
+                Console.Write(variable + ",");
+            }
+
+
+            Console.WriteLine("\n\nPrinting the count of elements in the queue \n"+ myQueue.Count());
+            
+            Console.WriteLine("\nQueue after Peeking from it");
+            Console.WriteLine("Value returned from peek method is "+myQueue.Peek());
+            foreach (int variable in myQueue)
+            {
+                Console.Write(variable + ",");
+            }
+
+            Console.WriteLine();
+
+            ///////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////
+            //File Hanlding
+            string path1 = @"C:\Users\Lenovo\source\repos\Collections\Collections\bin\Debug\netcoreapp3.1/DummyData1.txt";
+            string path2 = @"C:\Users\Lenovo\source\repos\Collections\Collections\bin\Debug\netcoreapp3.1/DummyData2.txt";
+            string path3 = @"C:\Users\Lenovo\source\repos\Collections\Collections\bin\Debug\netcoreapp3.1/DummyData3.txt";
+
+            string Abc = "Hello from the file1";
+            string Abcd = "Hello from the file2";
+            
+            /*File.WriteAllText(path1,Abc);
+            File.WriteAllText(path2, Abcd);
+            */
+            string DataRead =File.ReadAllText(path1);
+            Console.WriteLine(DataRead);
+
+            //This block is used to to auto close the file after the use
+            //the file will open at the start of the using block and
+            //At the end of the block the file is automatically closed.
+            
+            /*using (StreamWriter sw = File.AppendText(path1))
+            {
+                sw.WriteLine("\nHello once again using Stream Writer");
+            }
+
+            using (StreamReader sr = File.OpenText(path2))
+            {
+                string readed = "";
+                while ((readed = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(readed);
+                }
+            } */
+
+            DataRead = File.ReadAllText(path1);
+            Console.WriteLine("\n\n"+DataRead+"\n\n");
+            
+            DataRead = File.ReadAllText(path2);
+            Console.WriteLine("\n\n" + DataRead + "\n\n");
+
+
+            /*FileStream file = new FileStream(path3, FileMode.OpenOrCreate , FileAccess.ReadWrite);
+            //file.Write("Hello")
+            file.WriteByte(66); 
+            file.Close();
+*/
+            using (FileStream file1 = new FileStream(path3, FileMode.Append, FileAccess.Write))
+            {
+                using (StreamWriter sw = new StreamWriter(file1,Encoding.UTF8))
+                {
+                    int[] arrays = new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+                    foreach(int num in arrays)
+                    {
+                        sw.Write(num + " ");
+                    }
+
+                    sw.WriteLine("\nHelpppp");
+                }
+            }
+
+
+            using (FileStream file1 = new FileStream(path3, FileMode.Open, FileAccess.Read ))
+            {
+                using (StreamReader sr = new StreamReader(file1))
+                {
+                    string line = sr.ReadLine();
+                    while (line != null)
+                    {
+                        Console.WriteLine(line);
+                        line = sr.ReadLine();
+                    }
+
+                }
+            }
+
+
+
+            //Exception Handling Code
+            int[] except = new int[3] { 1, 2, 3 };
+            try
+            {
+                Console.WriteLine(except[10]);
+            }
+            catch(Exception error)
+            {
+                Console.WriteLine(error.Message);
+            }
+            finally
+            {
+                Console.WriteLine("The try catch Block has ended");
+            }
+
+
+
+
+
 
         }
     }
