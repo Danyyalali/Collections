@@ -455,10 +455,37 @@ namespace Collections
                 Console.WriteLine("The try catch Block has ended");
             }
 
+            /*using (FileStream fs = new FileStream(path1, FileMode.Open, FileAccess.Read))
+            {
+                using(StreamWriter stw = new StreamWriter(fs))
+                {
+
+                }
+
+                using(StreamReader str = new StreamReader(fs))
+                {
+
+                }
+
+            }*/
+
+            //Manipulating the tuples in the form of an array
+            Tuple<int,float,double ,char,string>[] studentTuples = new Tuple< int, float, double, char, string>[2];
+            for(int i = 0; i < 2; i++)
+            {
+                studentTuples[i] = new Tuple<int, float, double, char, string>(1, 2.2f, 3.3, 'a', "abcd");
+            }
 
 
+            foreach(Tuple<int, float, double, char, string> tp in studentTuples)
+            {
+                Console.Write(tp.Item1 +" , ");
+                Console.Write(tp.Item2 + " , ");
+                Console.Write(tp.Item3 + " , ");
+                Console.Write(tp.Item4 + " , ");
+                Console.WriteLine(tp.Item5);
 
-
+            }
 
         }
     }
