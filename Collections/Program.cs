@@ -469,16 +469,26 @@ namespace Collections
 
             }*/
 
+
+
+
             //Manipulating the tuples in the form of an array
             Tuple<int,float,double ,char,string>[] studentTuples = new Tuple< int, float, double, char, string>[2];
-            for(int i = 0; i < 2; i++)
+/*            Tuple<int, float, double, char, string>[] studentFiltered = new Tuple< int, float, double, char, string>[2];
+*/
+            for (int i = 0; i < 2; i++)
             {
                 studentTuples[i] = new Tuple<int, float, double, char, string>(1, 2.2f, 3.3, 'a', "abcd");
             }
 
-
+            /*int iterator=0;*/
             foreach(Tuple<int, float, double, char, string> tp in studentTuples)
             {
+                /*if (tp.Item5.Length >= 3)
+                {
+                    studentFiltered[iterator] = tp;
+                    iterator++;
+                }*/
                 Console.Write(tp.Item1 +" , ");
                 Console.Write(tp.Item2 + " , ");
                 Console.Write(tp.Item3 + " , ");
@@ -486,6 +496,69 @@ namespace Collections
                 Console.WriteLine(tp.Item5);
 
             }
+            //var v1 = new Tuple.Create(1,2);
+
+
+
+            //Manilulating with the string array using LINQ queries
+            string[] myNamesArray = new string[22] { "Ali","Yar","Wamik","Afaq","Salal","Daniel","June","Juliet",
+                                                     "danyyal","Yousuf","Bukht","Yar","Arshad","Kainat","aiman","sidra",
+                                                     "Tooba","zeeshan","Hyper","Don","Chaudary","Muaaz"};
+            var MyQueryResult = from names in myNamesArray
+                                   where names.Length >= 3
+                                   select names;
+
+            Console.WriteLine("name---first2letters--Caps--length");
+            foreach(var names in MyQueryResult)
+            {
+                Console.Write(names+" ");
+                Console.Write(names.Substring(0, 2)+" ");
+                Console.Write(names.ToUpper()+" ");
+                Console.WriteLine(names.ToUpper().Length);
+            }
+
+
+
+            //Maipulatin with Tuple array using the LINQ queries
+            var myTupleResults = studentTuples.Where(tuples => tuples.Item5.Substring(0, 2) == "ab" && tuples.Item5.Contains('b') && tuples.Item1 == 1);
+
+
+            //We can write queries in Two ways 
+
+            /*from tuples in studentTuples
+            where tuples.Item5.Substring(0, 2) == "ab" && tuples.Item5.Contains('b') && tuples.Item1==12
+            select tuples;*/
+
+            //Getting array in the resul of LINQ Queries
+            var myTupleResultsArray = studentTuples.Where(tuples => tuples.Item5.Substring(0, 2) == "ab" && tuples.Item5.Contains('b') && tuples.Item1 == 1).ToArray();
+            Console.WriteLine(myTupleResultsArray[0]);
+
+
+
+            Console.WriteLine("\n\n From Tuples results\nName---first2letters--Caps--length");
+            foreach (var tuples in myTupleResults)
+            {
+                Console.Write(tuples.Item1 + " ");
+                Console.Write(tuples.Item2 + " ");
+                Console.Write(tuples.Item3 + " ");
+                Console.Write(tuples.Item4.ToString() + " ");
+                Console.WriteLine(tuples.Item5.Substring(0) );
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
     }
