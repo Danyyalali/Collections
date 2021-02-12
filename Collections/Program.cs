@@ -7,8 +7,25 @@ using System.Text;
 
 namespace Collections
 {
+    public delegate void MakeNoise(int a);
     class Program
     {
+        void Noise(int a)
+        {
+            if (a > 0)
+            {
+                Console.WriteLine("Making Noise on the command of Delegate");
+            }
+            else if (a == 0)
+            {
+                Console.WriteLine("Cannot make Noise on the command of Delegate");
+
+            }
+            else
+            {
+                Console.WriteLine("I will not make Noise on the command of Delegate");
+            }
+        }
         static void Main(string[] args)
         {
 
@@ -545,11 +562,11 @@ namespace Collections
                 Console.WriteLine(tuples.Item5.Substring(0) );
 
             }
+            Program pg = new Program();
 
+            MakeNoise mk = new MakeNoise(pg.Noise);
 
-
-
-
+            mk(10);
 
 
 
